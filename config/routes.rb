@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
+  resources :posts
   devise_for :users
   get 'home/front'
-  root to: 'home#front'
+
+
+  authenticated :user do
+     root to: 'home#index', as: 'home'
+   end
+   unauthenticated :user do
+     root 'home#front'
+   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
